@@ -7,6 +7,7 @@ import numpy as np
 class WalkerBaseBulletEnv(BaseBulletEnv):
     def __init__(self, robot, render=False):
         print("WalkerBase::__init__")
+        print("hello")
         BaseBulletEnv.__init__(self, robot, render)
         self.camera_x = 0
         self.walk_target_x = 1e3  # kilometer away
