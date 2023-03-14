@@ -6,8 +6,7 @@ import numpy as np
 
 class WalkerBaseBulletEnv(BaseBulletEnv):
     def __init__(self, robot, render=False):
-        print("WalkerBase::__init__")
-        print("hello")
+#         print("WalkerBase::__init__")
         BaseBulletEnv.__init__(self, robot, render)
         self.camera_x = 0
         self.walk_target_x = 1e3  # kilometer away
@@ -19,7 +18,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
         return self.stadium_scene
 
     def reset(self):
-        print("WalkerBase::reset")
+#         print("WalkerBase::reset")
         if self.stateId >= 0:
             # print("restoreState self.stateId:",self.stateId)
             self._p.restoreState(self.stateId)
@@ -52,7 +51,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
     joints_at_limit_cost = -0.1	 # discourage stuck joints
 
     def step(self, a):
-        print("Succeeded in Entering WalkerBaseBulletEnv::step")
+#         print("Succeeded in Entering WalkerBaseBulletEnv::step")
         if not self.scene.multiplayer:  # if multiplayer, action first applied to all robots, then global step() called, then _step() for all robots with the same actions
             self.robot.apply_action(a)
             self.scene.global_step()
