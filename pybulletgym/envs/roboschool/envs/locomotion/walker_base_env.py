@@ -18,6 +18,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
         return self.stadium_scene
 
     def reset(self):
+        print("WalkerBase::reset")
         if self.stateId >= 0:
             # print("restoreState self.stateId:",self.stateId)
             self._p.restoreState(self.stateId)
