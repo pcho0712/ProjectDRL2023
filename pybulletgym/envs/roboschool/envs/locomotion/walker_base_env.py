@@ -96,20 +96,14 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
             print("feet_collision_cost")
             print(feet_collision_cost)
 
-#         self.rewards = [
-#             alive,
-#             2.0 * progress,
-#             1.0 * electricity_cost,
-#             joints_at_limit_cost,
-#             feet_collision_cost
-#         ]
         self.rewards = [
-            0.6 * float(self.progress),  # progress weight
-            -0.1 * float(self.electricity_cost),  # electricity cost
-            -0.02 * float(self.stall_torque_cost),  # stall torque cost
-            -0.001 * float(joints_at_limit_cost),  # joints at limit cost
-            -2 * float(self.feet_collision_cost)  # feet collision cost
+            alive,
+            1.5 * progress,
+            1.0 * electricity_cost,
+            joints_at_limit_cost,
+            feet_collision_cost
         ]
+
         if debugmode:
             print("rewards=")
             print(self.rewards)
