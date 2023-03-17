@@ -51,7 +51,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
     joints_at_limit_cost = -0.1	 # discourage stuck joints
 
     def step(self, a):
-#         print("Succeeded in Entering WalkerBaseBulletEnv::step")
+        print("Succeeded in Entering WalkerBaseBulletEnv::step")
         if not self.scene.multiplayer:  # if multiplayer, action first applied to all robots, then global step() called, then _step() for all robots with the same actions
             self.robot.apply_action(a)
             self.scene.global_step()
