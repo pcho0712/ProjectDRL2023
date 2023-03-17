@@ -83,7 +83,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
         electricity_cost += self.stall_torque_cost * float(np.square(a).mean())
 
         joints_at_limit_cost = float(self.joints_at_limit_cost * self.robot.joints_at_limit)
-        debugmode = 0
+        debugmode = 1 #0 #debugmode
         if debugmode:
             print("alive=")
             print(alive)
