@@ -57,6 +57,8 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
             self.scene.global_step()
 
         state = self.robot.calc_state()  # also calculates self.joints_at_limit
+        is_collision: bool = self.collision_check()
+        collision_reward = -1 if is_collision else 0
 
         alive = float(self.robot.alive_bonus(state[0] + self.robot.initial_z, self.robot.body_rpy[1]))   # state[0] is body height above ground, body_rpy[1] is pitch
         done = alive < 0
@@ -85,6 +87,8 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
         joints_at_limit_cost = float(self.joints_at_limit_cost * self.robot.joints_at_limit)
         debugmode = 0
         if debugmode:
+            print("collision_reward=")
+            print(collision_reward)
             print("alive=")
             print(alive)
             print("progress")
@@ -97,6 +101,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
             print(feet_collision_cost)
 
         self.rewards = [
+            collision_reward,
             alive,
             progress,
             electricity_cost,
