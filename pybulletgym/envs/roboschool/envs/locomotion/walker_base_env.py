@@ -66,7 +66,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
 
         potential_old = self.potential
         self.potential = self.robot.calc_potential()
-        progress = float(self.potential - potential_old)
+        progress = 5*float(self.potential - potential_old)
 
         feet_collision_cost = 0.0
         for i, f in enumerate(self.robot.feet):  # TODO: Maybe calculating feet contacts could be done within the robot code
@@ -81,6 +81,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
 
         electricity_cost = self.electricity_cost * float(np.abs(a*self.robot.joint_speeds).mean())  # let's assume we have DC motor with controller, and reverse current braking
         electricity_cost += self.stall_torque_cost * float(np.square(a).mean())
+        electricity_cost = -electricity_cost
 
         joints_at_limit_cost = float(self.joints_at_limit_cost * self.robot.joints_at_limit)
         debugmode = 0
