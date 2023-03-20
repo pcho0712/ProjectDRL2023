@@ -79,6 +79,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
                 self.robot.foot_force[i] = f.contact_list()[0][9]
             else:
                 self.robot.feet_contact[i] = 0.0
+                self.robot.foot_force[i] = 0
 
         electricity_cost = self.electricity_cost * float(np.abs(a*self.robot.joint_speeds).mean())  # let's assume we have DC motor with controller, and reverse current braking
         electricity_cost += self.stall_torque_cost * float(np.square(a).mean())
