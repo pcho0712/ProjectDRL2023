@@ -72,6 +72,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
         for i, f in enumerate(self.robot.feet):  # TODO: Maybe calculating feet contacts could be done within the robot code
             contact_ids = set((x[2], x[4]) for x in f.contact_list())
             # print("CONTACT OF '%d' WITH %d" % (contact_ids, ",".join(contact_names)) )
+            self.robot.foot_force[i] = 0.0
             if self.ground_ids & contact_ids:
                 # see Issue 63: https://github.com/openai/roboschool/issues/63
                 # feet_collision_cost += self.foot_collision_cost
@@ -85,11 +86,10 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
                 print("type(contact_id): ", type(contact_ids))
                 for x in f.contact_list():
                     if x[2] == contact_ids[0] and x[4] == contact_ids[1]:
-                        self.robot.foot_force[i] = x[9]
+                        self.robot.foot_force[i] += x[9]
                         print("i, x[9]: ", i, x[9])
             else:
                 self.robot.feet_contact[i] = 0.0
-                self.robot.foot_force[i] = 0
 
         electricity_cost = self.electricity_cost * float(np.abs(a*self.robot.joint_speeds).mean())  # let's assume we have DC motor with controller, and reverse current braking
         electricity_cost += self.stall_torque_cost * float(np.square(a).mean())
