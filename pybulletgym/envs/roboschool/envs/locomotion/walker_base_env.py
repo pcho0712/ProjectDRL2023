@@ -78,16 +78,12 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
                 # feet_collision_cost += self.foot_collision_cost
                 self.robot.feet_contact[i] = 1.0
                 contact_list = list(self.ground_ids & contact_ids)
-                print("list(self.ground_ids & contact_ids)", contact_list)
                 # there should be only one contact sets between foot and ground
                 assert len(contact_list) == 1
                 contact_ids = contact_list[0]
-                print("contact_id: ", contact_ids)
-                print("type(contact_id): ", type(contact_ids))
                 for x in f.contact_list():
                     if x[2] == contact_ids[0] and x[4] == contact_ids[1]:
                         self.robot.foot_force[i] += x[9]
-                        print("i, x[9]: ", i, x[9])
             else:
                 self.robot.feet_contact[i] = 0.0
 
