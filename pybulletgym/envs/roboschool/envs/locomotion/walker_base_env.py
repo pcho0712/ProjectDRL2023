@@ -86,7 +86,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
                 for x in f.contact_list():
                     if x[2] == contact_ids[0] and x[4] == contact_ids[1]:
                         self.robot.foot_force[i] = x[9]
-                        print("x[9]: ", x[9])
+                        print("i, x[9]: ", i, x[9])
             else:
                 self.robot.feet_contact[i] = 0.0
                 self.robot.foot_force[i] = 0
