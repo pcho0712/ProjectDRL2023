@@ -79,6 +79,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
                 contact_list = list(self.ground_ids & contact_ids)
                 print("list(self.ground_ids & contact_ids)", list(self.ground_ids & contact_ids))
                 contact_id = (contact_list[0])[0]
+                print("contact_id: ", contact_id)
                 print("type(contact_id): ", type(contact_id))
                 self.robot.foot_force[i] = f.contact_list()[contact_id][9]
             else:
