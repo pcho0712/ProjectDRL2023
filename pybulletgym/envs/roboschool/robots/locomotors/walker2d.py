@@ -6,11 +6,11 @@ class Walker2D(WalkerBase, MJCFBasedRobot):
     foot_list = ["foot", "foot_left"]
 
     def __init__(self):
-        WalkerBase.__init__(self, power=0.40)
-        MJCFBasedRobot.__init__(self, "walker2d.xml", "torso", action_dim=6, obs_dim=22)
         print("Walker2D.__init__() is called")
         self.foot_force = [0]*len(self.foot_list)
         print("self.foot_force = ", self.foot_force)
+        WalkerBase.__init__(self, power=0.40)
+        MJCFBasedRobot.__init__(self, "walker2d.xml", "torso", action_dim=6, obs_dim=22)
 
     def alive_bonus(self, z, pitch):
         return +1 if z > 0.8 and abs(pitch) < 1.0 else -1
