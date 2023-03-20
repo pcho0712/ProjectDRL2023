@@ -76,8 +76,10 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
                 # see Issue 63: https://github.com/openai/roboschool/issues/63
                 # feet_collision_cost += self.foot_collision_cost
                 self.robot.feet_contact[i] = 1.0
-                contact_id = list(self.ground_ids & contact_ids)[0]
+                contact_list = list(self.ground_ids & contact_ids)
                 print("list(self.ground_ids & contact_ids)", list(self.ground_ids & contact_ids))
+                contact_id = contact_list[0]
+                print("type(contact_id): "type(contact_id))
                 self.robot.foot_force[i] = f.contact_list()[contact_id][9]
             else:
                 self.robot.feet_contact[i] = 0.0
