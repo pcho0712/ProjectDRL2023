@@ -72,10 +72,18 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
         for i, f in enumerate(self.robot.feet):  # TODO: Maybe calculating feet contacts could be done within the robot code
             contact_ids = set((x[2], x[4]) for x in f.contact_list())
             # print("CONTACT OF '%d' WITH %d" % (contact_ids, ",".join(contact_names)) )
+            self.robot.foot_force[i] = 0.0
             if self.ground_ids & contact_ids:
                 # see Issue 63: https://github.com/openai/roboschool/issues/63
                 # feet_collision_cost += self.foot_collision_cost
                 self.robot.feet_contact[i] = 1.0
+                contact_list = list(self.ground_ids & contact_ids)
+                # there should be only one contact sets between foot and ground
+                assert len(contact_list) == 1
+                contact_ids = contact_list[0]
+                for x in f.contact_list():
+                    if x[2] == contact_ids[0] and x[4] == contact_ids[1]:
+                        self.robot.foot_force[i] += x[9]
             else:
                 self.robot.feet_contact[i] = 0.0
 
