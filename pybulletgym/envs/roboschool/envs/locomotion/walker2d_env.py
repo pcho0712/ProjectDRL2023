@@ -6,8 +6,8 @@ class Walker2DBulletEnv(WalkerBaseBulletEnv):
     def __init__(self):
         self.robot = Walker2D()
         WalkerBaseBulletEnv.__init__(self, self.robot)
-        self.obstacle_pos_x = 5.0
-        self.obstacle_size_x = 1.0
+        self.obstacle_pos_x = 10.0
+        self.obstacle_size_x = 2.0
         self.obstacle_size_z = 2.0
 
     def collision_check(self)-> bool:
