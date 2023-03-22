@@ -101,7 +101,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
             print(feet_collision_cost)
 
         self.rewards = [
-            5.0*collision_reward,
+            -5.0*collision_reward,
             alive,
             progress,
             electricity_cost,
