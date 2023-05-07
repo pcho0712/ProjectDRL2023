@@ -23,9 +23,8 @@ class StadiumScene(Scene):
 			# stadium_pose = cpp_household.Pose()
 			# if self.zero_at_running_strip_start_line:
 			#	 stadium_pose.set_xyz(27, 21, 0)  # see RUN_STARTLINE, RUN_RAD constants
-
+			
 			print(os.getcwd())
-
 			filename = os.path.join(os.path.dirname(__file__), "..", "..", "assets", "scenes", "stadium", "plane_stadium.sdf")
 			self.ground_plane_mjcf=self._p.loadSDF(filename)
 			#filename = os.path.join(pybullet_data.getDataPath(),"stadium_no_collision.sdf")
