@@ -13,6 +13,7 @@ class Humanoid(WalkerBase, MJCFBasedRobot):
         # 17 joints, 4 of them important for walking (hip, knee), others may as well be turned off, 17/4 = 4.25
         self.random_yaw = random_yaw
         self.random_lean = random_lean
+        self.foot_force = [0]*len(self.foot_list)
 
     def robot_specific_reset(self, bullet_client):
         WalkerBase.robot_specific_reset(self, bullet_client)
