@@ -75,7 +75,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
             self.robot.foot_2d_orien[i] = (R.from_quat(self.robot.foot_3d_orien[i]).as_matrix())[:2,2] # z direction is the normal of the foot (capsule)
             contact_ids = set((x[2], x[4]) for x in f.contact_list())
             # print("CONTACT OF '%d' WITH %d" % (contact_ids, ",".join(contact_names)) )
-            self.robot.contact_pos[i] = []
+            self.robot.foot_contact_pos[i] = []
             self.robot.foot_force_each[i] = []
             self.robot.foot_force_sum[i] = 0.0
             if self.ground_ids & contact_ids:
@@ -88,7 +88,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
                 contact_ids = contact_list[0]
                 for x in f.contact_list():
                     if x[2] == contact_ids[0] and x[4] == contact_ids[1]:
-                        self.robot.contact_pos[i].append(x[6]) # contact position of the floor not foot
+                        self.robot.foot_contact_pos[i].append(x[6]) # contact position of the floor not foot
                         self.robot.foot_force_each[i].append(x[9])
                         self.robot.foot_force_sum[i] += x[9]
             else:
