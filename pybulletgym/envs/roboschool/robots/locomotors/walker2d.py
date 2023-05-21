@@ -11,6 +11,7 @@ class Walker2D(WalkerBase, MJCFBasedRobot):
         MJCFBasedRobot.__init__(self, "walker2d.xml", "torso", action_dim=6, obs_dim=22)
         self.foot_force = [0]*len(self.foot_list)
         self.foot_3d_orien = [np.array([0,0,0,1])]*len(self.foot_list)
+        self.foot_2d_orien = [np.array([1,0])]*len(self.foot_list)
 
     def alive_bonus(self, z, pitch):
         return +1 if z > 0.8 and abs(pitch) < 1.0 else -1
