@@ -1,5 +1,6 @@
 from pybulletgym.envs.roboschool.robots.locomotors.walker_base import WalkerBase
 from pybulletgym.envs.roboschool.robots.robot_bases import MJCFBasedRobot
+import numpy as np
 
 
 class Walker2D(WalkerBase, MJCFBasedRobot):
@@ -9,6 +10,7 @@ class Walker2D(WalkerBase, MJCFBasedRobot):
         WalkerBase.__init__(self, power=0.40)
         MJCFBasedRobot.__init__(self, "walker2d.xml", "torso", action_dim=6, obs_dim=22)
         self.foot_force = [0]*len(self.foot_list)
+        self.foot_orien = [np.zeros(4)]*len(self.foot_list)
 
     def alive_bonus(self, z, pitch):
         return +1 if z > 0.8 and abs(pitch) < 1.0 else -1

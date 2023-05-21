@@ -70,6 +70,7 @@ class WalkerBaseBulletEnv(BaseBulletEnv):
 
         feet_collision_cost = 0.0
         for i, f in enumerate(self.robot.feet):  # TODO: Maybe calculating feet contacts could be done within the robot code
+            self.robot.foot_orien[i] = f.get_orientation()
             contact_ids = set((x[2], x[4]) for x in f.contact_list())
             # print("CONTACT OF '%d' WITH %d" % (contact_ids, ",".join(contact_names)) )
             self.robot.foot_force[i] = 0.0
