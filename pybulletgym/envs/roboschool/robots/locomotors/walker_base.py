@@ -1,5 +1,6 @@
 from pybulletgym.envs.roboschool.robots.robot_bases import XmlBasedRobot
 import numpy as np
+from scipy.spatial.transform import Rotation as R
 
 
 class WalkerBase(XmlBasedRobot):
@@ -19,7 +20,8 @@ class WalkerBase(XmlBasedRobot):
         self.feet = [self.parts[f] for f in self.foot_list]
         self.feet_contact = np.array([0.0 for f in self.foot_list], dtype=np.float32)
         for i, f in enumerate(self.feet):
-            self.foot_orien[i] = f.get_orientation()
+            self.foot_3d_orien[i] = f.get_orientation()
+            self.foot_2d_orien[i] = R.from_quat(self.foot_3d_orien[i])[:2,2] # z direction is the normal of the foot (capsule)
         try:
             self.scene.actor_introduce(self)
         except AttributeError:
