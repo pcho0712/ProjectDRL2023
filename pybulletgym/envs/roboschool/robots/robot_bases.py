@@ -267,6 +267,17 @@ class BodyPart:
 	def get_orientation(self):
 		return self.current_orientation()
 
+	def get_world_pose(self):
+		body_id, link_id = self.bodies[self.bodyIndex], self.bodyPartIndex
+		if link_id == -1:
+			(x, y, z), (a, b, c, d) = self._p.getBasePositionAndOrientation(body_id)
+		else:
+			(x, y, z), (a, b, c, d), _, _, _, _ = self._p.getLinkState(body_id, link_id, computeForwardKinematics=1)
+		return np.array([x, y, z, a, b, c, d])
+
+	def get_world_orientation(self):
+		return self.get_world_pose()[3:]
+
 	def get_velocity(self):
 		return self._p.getBaseVelocity(self.bodies[self.bodyIndex])
 
