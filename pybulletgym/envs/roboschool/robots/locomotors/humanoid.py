@@ -14,7 +14,7 @@ class Humanoid(WalkerBase, MJCFBasedRobot):
         self.random_yaw = random_yaw
         self.random_lean = random_lean
         self.foot_force = [0]*len(self.foot_list)
-        self.foot_orien = [np.zeros(4)]*len(self.foot_list)
+        self.foot_orien = [np.array([0,0,0,1])]*len(self.foot_list)
 
     def robot_specific_reset(self, bullet_client):
         WalkerBase.robot_specific_reset(self, bullet_client)
