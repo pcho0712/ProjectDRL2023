@@ -13,7 +13,9 @@ class Humanoid(WalkerBase, MJCFBasedRobot):
         # 17 joints, 4 of them important for walking (hip, knee), others may as well be turned off, 17/4 = 4.25
         self.random_yaw = random_yaw
         self.random_lean = random_lean
-        self.foot_force = [0]*len(self.foot_list)
+        self.foot_force_each = [[]]*len(self.foot_list)
+        self.foot_force_sum = [0]*len(self.foot_list)
+        self.foot_contact_pos = [[]]*len(self.foot_list)
         self.foot_3d_orien = [np.array([0,0,0,1])]*len(self.foot_list)
         self.foot_2d_orien = [np.array([1,0])]*len(self.foot_list)
 
