@@ -42,6 +42,7 @@ class WalkerBase(XmlBasedRobot):
 
         body_pose = self.robot_body.pose()
         parts_xyz = np.array([p.pose().xyz() for p in self.parts.values()]).flatten()
+        self.parts_xyz = parts_xyz
         self.body_xyz = (
             parts_xyz[0::3].mean(), parts_xyz[1::3].mean(), body_pose.xyz()[2])  # torso z is more informative than mean z
         self.body_rpy = body_pose.rpy()
